@@ -34,37 +34,8 @@ class TemperatureScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 45,
-                  child: ArabicDayName(
-                    dayIndex: DateTime.now().weekday - 1,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 25,
-                    child: Text(
-                      formattedDate,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
             SizedBox(
-              height: 70,
+              height: 85,
               child: Text(
                 name,
                 style: const TextStyle(
@@ -74,44 +45,43 @@ class TemperatureScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 120,
-              child: Transform.scale(
-                scale: 2.0,
-                alignment: Alignment.center,
-                child: Image(
-                  image: NetworkImage(
-                    'https://openweathermap.org/img/wn/${icon}@2x.png',
-                  ),
+              height: 45,
+              child: ArabicDayName(
+                dayIndex: DateTime.now().weekday - 1,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
                 ),
               ),
             ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 57,
+            SizedBox(
+              height: 35,
+              child: Text(
+                formattedDate,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Icon(
-                    Icons.thermostat,
-                    color: Colors.redAccent,
-                    size: 45,
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  child: Text(
-                    "$temp°C",
-                    style: const TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
+              ),
             ),
             SizedBox(
-              height: 135,
+              height: 120,
+              child: Image(
+                  image: NetworkImage(
+                      'https://openweathermap.org/img/wn/${icon}@2x.png')),
+            ),
+            SizedBox(
+              height: 50,
+              child: Text(
+                name,
+                style: const TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ),
+            SizedBox(
+              height: 130,
               child: Text(
                 description,
                 style: const TextStyle(fontSize: 21, color: Colors.white),
