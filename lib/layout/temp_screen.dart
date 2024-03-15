@@ -34,8 +34,37 @@ class TemperatureScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 45,
+                  child: ArabicDayName(
+                    dayIndex: DateTime.now().weekday - 1,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 25,
+                    child: Text(
+                      formattedDate,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             SizedBox(
-              height: 85,
+              height: 70,
               child: Text(
                 name,
                 style: const TextStyle(
@@ -45,46 +74,47 @@ class TemperatureScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 45,
-              child: ArabicDayName(
-                dayIndex: DateTime.now().weekday - 1,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 35,
-              child: Text(
-                formattedDate,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            SizedBox(
               height: 120,
-              child: Image(
+              child: Transform.scale(
+                scale: 2.0,
+                alignment: Alignment.center,
+                child: Image(
                   image: NetworkImage(
-                      'https://openweathermap.org/img/wn/${icon}@2x.png')),
-            ),
-            SizedBox(
-              height: 50,
-              child: Text(
-                "$temp°C",
-                style: const TextStyle(
-                    fontSize: 27,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    'https://openweathermap.org/img/wn/${icon}@2x.png',
+                  ),
+                ),
               ),
             ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 57,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: Icon(
+                    Icons.thermostat,
+                    color: Colors.redAccent,
+                    size: 45,
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  child: Text(
+                    "$temp°C",
+                    style: const TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
             SizedBox(
-              height: 130,
+              height: 135,
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 21, color: Colors.white),
               ),
             ),
             Row(
@@ -94,11 +124,26 @@ class TemperatureScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
-                      Text("$humidity%",
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
-                      const Text("الرطوبة ",
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
+                      Text(
+                        "$humidity%",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.water_drop,
+                        size: 35,
+                        color: Colors.blue,
+                      ),
                     ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 50, // Adjust height of the line
+                  child: VerticalDivider(
+                    color: Colors.red,
+                    thickness: 2, // Adjust thickness of the line
                   ),
                 ),
                 Container(
@@ -107,10 +152,20 @@ class TemperatureScreen extends StatelessWidget {
                     children: [
                       Text(temp_min.toString(),
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 12)),
-                      const Text("الحرارة الادنى",
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
+                              color: Colors.white, fontSize: 20)),
+                      const Icon(
+                        Icons.arrow_downward_rounded,
+                        color: Colors.blue,
+                        size: 35,
+                      )
                     ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 50, // Adjust height of the line
+                  child: VerticalDivider(
+                    color: Colors.red,
+                    thickness: 2, // Adjust thickness of the line
                   ),
                 ),
                 Container(
@@ -119,9 +174,12 @@ class TemperatureScreen extends StatelessWidget {
                     children: [
                       Text(temp_max.toString(),
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 12)),
-                      const Text("الحرارة العظمى",
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
+                              color: Colors.white, fontSize: 20)),
+                      const Icon(
+                        Icons.arrow_outward_rounded,
+                        color: Colors.blue,
+                        size: 35,
+                      )
                     ],
                   ),
                 ),
