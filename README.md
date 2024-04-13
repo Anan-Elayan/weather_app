@@ -1,5 +1,5 @@
 # weather_app
-
+Contributed to the development of the weather app, a mobile application designed to provide users with up-to-date weather forecasts and information. Utilized technologies such as Flutter, Android Studio, and weather APIs to implement features like real-time weather updates, location-based forecasts, and user-friendly interfaces
 A new Flutter project.
 
 ## Getting Started
