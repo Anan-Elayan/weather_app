@@ -4,7 +4,11 @@
 A mobile application designed to provide users with up-to-date weather forecasts and information.
 Used technologies like Flutter, Android Studio, and weather APIs to implement features like real-time weather updates, location-based forecasts, and user-friendly interfaces New Flutter project.
 
-
+# Technology Stack
+- CroosPlatForm: Flutter
+- State Management: Bloc
+- UI Design: Material Design
+- API Integration: Integration with news APIs (e.g., OpenWeatherMap)
 
 
 ![iPhone 14 Pro Max – 1](https://github.com/Anan-Elayan/weather_app/assets/99610614/7517cf05-4d21-4187-815e-6433281c218c)
