@@ -8,7 +8,7 @@ Used technologies like Flutter, Android Studio, and weather APIs to implement fe
 - CroosPlatForm: Flutter
 - State Management: Bloc
 - UI Design: Material Design
-- API Integration: Integration with news APIs (e.g., OpenWeatherMap)
+- API Integration: Integration with news APIs (e.g., OpenWeatherMap: https://openweathermap.org/api)
 
 
 ![iPhone 14 Pro Max – 1](https://github.com/Anan-Elayan/weather_app/assets/99610614/7517cf05-4d21-4187-815e-6433281c218c)
