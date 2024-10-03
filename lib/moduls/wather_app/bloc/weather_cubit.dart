@@ -4,6 +4,7 @@ import 'package:weather_app/models/main_model.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/shared/network/remote/result_api.dart';
 
+import '../../../models/forcast_model.dart';
 import '../../../shared/network/remote/weather_api_repository.dart';
 
 part 'weather_state.dart';
@@ -18,6 +19,7 @@ class WeatherCubit extends Cubit<WeatherState> {
     await getLocation();
     await getMainData();
     await getWeatherDetails();
+    await getFiveDayForecast();
   }
 
   Future<void> getLocation() async {
@@ -27,6 +29,18 @@ class WeatherCubit extends Cubit<WeatherState> {
       emit(
         state.copyWith(nameLocation: name, error: ''),
       );
+    }
+  }
+
+  Future<void> getFiveDayForecast() async {
+    final ResultApi resultApi = await weatherApiRepository.getFiveDayForecast();
+    if (resultApi.isDone) {
+      List<ForecastModel> forecasts = List.from(
+        resultApi.resultOrError,
+      );
+      emit(state.copyWith(forecastList: forecasts, error: ''));
+    } else {
+      emit(state.copyWith(error: resultApi.resultOrError));
     }
   }
 

@@ -148,7 +148,7 @@ class TemperatureScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 135,
+                    height: 90,
                     child: Text(
                       description,
                       style: const TextStyle(

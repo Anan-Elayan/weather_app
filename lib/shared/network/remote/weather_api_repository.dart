@@ -6,6 +6,8 @@ import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/shared/network/remote/result_api.dart';
 import 'package:weather_app/shared/network/remote/weather_api.dart';
 
+import '../../../models/forcast_model.dart';
+
 class WeatherApiRepository {
   final WeatherApi weatherApi;
 
@@ -67,6 +69,30 @@ class WeatherApiRepository {
       return ResultApi(
         isDone: false,
         resultOrError: 'لا يوجد اتصال بالإنترنت',
+      );
+    }
+  }
+
+  Future<ResultApi> getFiveDayForecast() async {
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      ResultApi resultApi = await weatherApi.getFiveDayForecast();
+      if (resultApi.isDone) {
+        Map<String, dynamic> responseData = jsonDecode(resultApi.resultOrError);
+        print(responseData);
+        List<dynamic> forecastData = responseData['list'];
+        List<ForecastModel> forecasts = forecastData.map((forecast) {
+          return ForecastModel.fromJson(forecast);
+        }).toList();
+
+        return ResultApi(isDone: true, resultOrError: forecasts);
+      } else {
+        return resultApi;
+      }
+    } else {
+      return ResultApi(
+        isDone: false,
+        resultOrError: 'No internet access',
       );
     }
   }
