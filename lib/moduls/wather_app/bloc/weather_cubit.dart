@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:weather_app/models/main_model.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/shared/network/remote/result_api.dart';
-import 'package:equatable/equatable.dart';
 
 import '../../../shared/network/remote/weather_api_repository.dart';
 
@@ -12,10 +12,12 @@ class WeatherCubit extends Cubit<WeatherState> {
   final WeatherApiRepository weatherApiRepository;
 
   WeatherCubit({required this.weatherApiRepository})
-      : super(const WeatherState()) {
-    getLocation();
-    getMainData();
-    getWeatherDetails();
+      : super(const WeatherState());
+
+  Future<void> fetchWeather() async {
+    await getLocation();
+    await getMainData();
+    await getWeatherDetails();
   }
 
   Future<void> getLocation() async {
@@ -31,7 +33,6 @@ class WeatherCubit extends Cubit<WeatherState> {
   Future<void> getMainData() async {
     final ResultApi resultApi = await weatherApiRepository.getMainData();
     if (resultApi.isDone) {
-      print('uu');
       List<MainModelWeather> mainWeatherList =
           List.from(resultApi.resultOrError);
       emit(state.copyWith(error: '', listMainWeather: mainWeatherList));
@@ -43,10 +44,7 @@ class WeatherCubit extends Cubit<WeatherState> {
   Future<void> getWeatherDetails() async {
     final ResultApi resultApi = await weatherApiRepository.getWeatherDetails();
     if (resultApi.isDone) {
-      print('yyy');
-      List<WeatherModel> weatherDetails = List.from(
-        resultApi.resultOrError,
-      );
+      List<WeatherModel> weatherDetails = List.from(resultApi.resultOrError);
       emit(state.copyWith(weatherDetails: weatherDetails, error: ''));
     } else {
       emit(state.copyWith(error: resultApi.resultOrError));

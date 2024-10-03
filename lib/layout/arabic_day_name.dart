@@ -9,14 +9,16 @@ class ArabicDayName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> arabicDayNames = [
-      'السبت', 
-      'الأحد', 
-      'الاثنين', 
-      'الثلاثاء', 
-      'الأربعاء', 
-      'الخميس', 
-      'الجمعة', 
+      'الاثنين',
+      'الثلاثاء',
+      'الأربعاء',
+      'الخميس',
+      'الجمعة',
+      'السبت',
+      'الأحد',
     ];
+
+    int dayIndex = DateTime.now().weekday - 1;
 
     return Text(
       arabicDayNames[dayIndex],

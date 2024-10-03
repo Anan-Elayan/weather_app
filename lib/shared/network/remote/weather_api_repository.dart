@@ -18,12 +18,9 @@ class WeatherApiRepository {
     if (connectivityResult != ConnectivityResult.none) {
       ResultApi resultApi = await weatherApi.getWeather();
       if (resultApi.isDone) {
-        print("rrr");
         Map<String, dynamic> data = jsonDecode(resultApi.resultOrError);
-        print('${data.length}lenght1');
 
         String name = data['name'];
-        print(name);
 
         return ResultApi(isDone: true, resultOrError: name);
       } else {
@@ -32,48 +29,36 @@ class WeatherApiRepository {
     } else {
       return ResultApi(
         isDone: false,
-        resultOrError: 'No internet access',
+        resultOrError: 'لا يوجد اتصال بالإنترنت',
       );
     }
   }
 
   Future<ResultApi> getMainData() async {
     final connectivityResult = await (Connectivity().checkConnectivity());
-    print('oooooooo');
+
     if (connectivityResult != ConnectivityResult.none) {
       ResultApi resultApi = await weatherApi.getWeather();
-      print('ppppp');
+
       if (resultApi.isDone) {
-        print('gggg');
         Map<String, dynamic> responseData = jsonDecode(resultApi.resultOrError);
-        print('${responseData.length}lenght');
         Map<String, dynamic> mainData = responseData['main'];
-        for (int i = 0; i < mainData.length; i++) {
-          print('${mainData[i]}main data');
-        }
-        double tempValue = mainData['temp'];
-        print(tempValue);
-        double temp = mainData['temp'];
-        double temp_min = mainData['temp_min'];
-        double temp_max = mainData['temp_max'];
-        int pressure = mainData['pressure'];
-        int humidity = mainData['humidity'];
-        print('Temperature: $temp');
-        print(temp);
-        print(temp_min);
-        print(temp_max);
-        print(pressure);
-        print(humidity);
+
+        double tempValue = (mainData['temp'] as num).toDouble();
+        double temp_min = (mainData['temp_min'] as num).toDouble();
+        double temp_max = (mainData['temp_max'] as num).toDouble();
+        int pressure = mainData['pressure'] as int;
+        int humidity = mainData['humidity'] as int;
 
         MainModelWeather mainModelWeather = MainModelWeather(
-            temp: temp,
-            humidity: humidity,
-            pressure: pressure,
-            temp_min: temp_min,
-            temp_max: temp_max);
+          temp: tempValue,
+          humidity: humidity,
+          pressure: pressure,
+          temp_min: temp_min,
+          temp_max: temp_max,
+        );
 
         list.add(mainModelWeather);
-        print('${list.length}----------------');
         return ResultApi(isDone: true, resultOrError: list);
       } else {
         return resultApi;
@@ -81,7 +66,7 @@ class WeatherApiRepository {
     } else {
       return ResultApi(
         isDone: false,
-        resultOrError: 'No internet access',
+        resultOrError: 'لا يوجد اتصال بالإنترنت',
       );
     }
   }
@@ -108,7 +93,7 @@ class WeatherApiRepository {
     } else {
       return ResultApi(
         isDone: false,
-        resultOrError: 'No internet access',
+        resultOrError: 'لا يوجد اتصال بالإنترنت',
       );
     }
   }

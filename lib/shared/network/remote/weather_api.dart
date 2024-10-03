@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:weather_app/shared/network/remote/result_api.dart';
-import 'package:weather_app/shared/network/remote/string.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/shared/network/remote/result_api.dart';
+import 'package:weather_app/shared/network/remote/string.dart';
 
 class WeatherApi {
   Future<ResultApi> getWeather() async {
@@ -20,8 +19,6 @@ class WeatherApi {
       });
       var response = await http.get(url);
       var dataDecoded = jsonDecode(response.body);
-      print(url);
-      print(response);
 
       if (response.statusCode == 200) {
         return ResultApi(isDone: true, resultOrError: response.body);
@@ -30,7 +27,6 @@ class WeatherApi {
             isDone: false, resultOrError: 'Some Error According in server');
       }
     } catch (e) {
-      debugPrint(e.toString());
       return ResultApi(isDone: false, resultOrError: 'Some Error accord');
     }
   }

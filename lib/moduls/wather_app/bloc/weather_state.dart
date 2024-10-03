@@ -17,7 +17,6 @@ class WeatherState extends Equatable {
     List<MainModelWeather>? listMainWeather,
     String? error,
     String? nameLocation,
-    double? tempValue,
     List<WeatherModel>? weatherDetails,
   }) =>
       WeatherState(
